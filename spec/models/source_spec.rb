@@ -24,4 +24,14 @@ RSpec.describe Source, type: :model do
         .to be_valid
     end
   end
+
+  describe ".old" do
+    it "returns sources that were not updated recently" do
+      FactoryGirl.create(:source, fetched_at: 2.minutes.ago)
+      old_source = FactoryGirl.create(:source, fetched_at: 1.year.ago)
+      new_source = FactoryGirl.create(:source, fetched_at: 1.minute.ago)
+
+      expect(Source.old).to contain_exactly(old_source)
+    end
+  end
 end

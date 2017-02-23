@@ -10,6 +10,8 @@ class FetchJobOffersWorker
       source.job_offers << JobOffer.from_entry(entry)
     end
 
+    source.fetched_at = Time.now
+
     source.save!
   end
 
