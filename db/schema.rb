@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223200600) do
+ActiveRecord::Schema.define(version: 20170223212804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "feed_sources", force: :cascade do |t|
+    t.integer  "feed_id",    null: false
+    t.integer  "source_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feed_id"], name: "index_feed_sources_on_feed_id", using: :btree
+    t.index ["source_id"], name: "index_feed_sources_on_source_id", using: :btree
+  end
+
+  create_table "feeds", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "job_offers", force: :cascade do |t|
     t.string   "url",          null: false
