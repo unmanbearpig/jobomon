@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Feed do
+  it { should validate_presence_of :title }
+
   describe "#job_offers" do
     it "queries job offers through its sources" do
       feed = FactoryGirl.create(:feed)
