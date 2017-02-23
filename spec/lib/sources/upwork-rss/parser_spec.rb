@@ -10,6 +10,10 @@ module Sources
       expect(entries.count).to eq(30)
     end
 
+    it "returns entries" do
+      expect(entries.first).to be_kind_of(Entry)
+    end
+
     it "returns the correct entries" do
       aggregate_failures do
         expect(entries.first.title)
