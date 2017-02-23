@@ -8,7 +8,7 @@ class FeedsController < ApplicationController
   end
 
   def show
-    raise NotImplementedError
+    render json: Feed.find(params.fetch(:id))
   end
 
   private
