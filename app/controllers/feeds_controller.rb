@@ -1,10 +1,6 @@
 class FeedsController < ApplicationController
   def index
-    respond_to do |format|
-      format.json do
-        render json: feeds
-      end
-    end
+    render json: feeds
   end
 
   def create
