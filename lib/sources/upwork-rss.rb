@@ -3,12 +3,16 @@ require_relative 'upwork-rss/parser'
 
 module Sources
   class UpworkRSS
+    def self.fetch(url)
+      parser.parse_feed fetcher.fetch(url).body
+    end
+
     def self.fetcher
-      Fetcher.new
+      Fetcher
     end
 
     def self.parser
-      Parser.new
+      Parser
     end
   end
 end
