@@ -7,15 +7,19 @@ RSpec.describe "Sources", type: :request do
 
   describe "GET /sources" do
     it "returns the list of all sources" do
-      source = FactoryGirl.create(:source, title: 'hello', url: 'https://example.com/test')
+      source = FactoryGirl.create(:source,
+                                  title: 'hello',
+                                  url: 'https://example.com/test',
+                                  source_type: :upwork)
 
       get sources_path
 
       expect(response).to have_http_status(200)
       expect(json_response)
-        .to eq('sources' => [{'id' => source.id,
-                            'title' => 'hello',
-                            'url' => 'https://example.com/test'}])
+        .to eq('sources' => [{ 'id' => source.id,
+                               'title' => 'hello',
+                               'url' => 'https://example.com/test',
+                               'source_type' => 'upwork' }])
     end
   end
 
@@ -23,7 +27,8 @@ RSpec.describe "Sources", type: :request do
     let(:source_data) do
       source_data = {
         title: 'hello',
-        url: 'https://example.com/test'
+        url: 'https://example.com/test',
+        source_type: 'upwork'
       }
     end
 
@@ -36,7 +41,6 @@ RSpec.describe "Sources", type: :request do
         source = Source.first
         expect(source.title).to eq('hello')
         expect(source.url).to eq('https://example.com/test')
-
       end
 
       it "returns the created source" do
@@ -47,7 +51,8 @@ RSpec.describe "Sources", type: :request do
           .to eq('source' =>
                  { 'id' => Source.first.id,
                    'title' => 'hello',
-                   'url' => 'https://example.com/test'})
+                   'url' => 'https://example.com/test',
+                   'source_type' => 'upwork' })
 
       end
     end
@@ -87,7 +92,8 @@ RSpec.describe "Sources", type: :request do
           .to eq('source' => {
                    'id' => source.id,
                    'url' => source.url,
-                   'title' => source.title
+                   'title' => source.title,
+                   'source_type' => source.source_type.to_s
                  })
 
       end

@@ -14,6 +14,6 @@ class SourcesController < ApiController
   private
 
   def source_params
-    params.require(:source).permit(:title, :url)
+    params.require(:source).permit(:title, :url, :source_type)
   end
 end
