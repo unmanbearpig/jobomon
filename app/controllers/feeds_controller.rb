@@ -2,7 +2,7 @@ class FeedsController < ApplicationController
   def index
     respond_to do |format|
       format.json do
-        render json: Feed.all, each_searializer: FeedSerializer
+        render json: feeds, each_searializer: FeedSerializer
       end
     end
   end
