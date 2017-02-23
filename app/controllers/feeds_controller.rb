@@ -11,10 +11,6 @@ class FeedsController < ApplicationController
     render json: Feed.create!(feed_params)
   end
 
-  def delete
-    raise NotImplementedError
-  end
-
   def show
     raise NotImplementedError
   end
