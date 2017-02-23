@@ -8,7 +8,8 @@ class Source < ApplicationRecord
             inclusion: { in: Sources.supported_source_types,
                          message: 'is not a supported type' }
 
-  scope(:old, -> { where('fetched_at < :time', time: 10.minutes.ago) })
+  scope(:old, -> { where('fetched_at is null or fetched_at < :time',
+                         time: 10.minutes.ago) })
 
   def source_type
     self[:source_type]&.to_sym

@@ -55,6 +55,15 @@ RSpec.describe "Sources", type: :request do
                    'source_type' => 'upwork' })
 
       end
+
+      it "schedules a job to fetch the offers" do
+        allow(FetchJobOffersWorker).to receive(:perform_async)
+
+        post sources_path, params: { source: source_data }
+
+        expect(FetchJobOffersWorker)
+          .to have_received(:perform_async).with(Source.last.id).once
+      end
     end
 
     context "failure" do

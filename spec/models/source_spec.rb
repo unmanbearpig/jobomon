@@ -33,5 +33,11 @@ RSpec.describe Source, type: :model do
 
       expect(Source.old).to contain_exactly(old_source)
     end
+
+    it "returns sources that were never fetched" do
+      never_fetched = FactoryGirl.create(:source)
+
+      expect(Source.old).to contain_exactly(never_fetched)
+    end
   end
 end

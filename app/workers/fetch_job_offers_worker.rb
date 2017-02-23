@@ -16,6 +16,6 @@ class FetchJobOffersWorker
   end
 
   def perform(source_id)
-    fetch_source_id(source_id)
+    self.class.fetch_source_id(source_id)
   end
 end

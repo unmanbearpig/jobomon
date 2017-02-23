@@ -4,7 +4,9 @@ class SourcesController < ApiController
   end
 
   def create
-    render json: Source.create!(source_params)
+    new_source = Source.create!(source_params)
+    render json: new_source
+    FetchJobOffersWorker.perform_async(new_source.id)
   end
 
   def show
