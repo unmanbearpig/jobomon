@@ -76,19 +76,35 @@ RSpec.describe "Feeds", type: :request do
   end
 
   describe "GET /feeds/:id" do
-    it "returns specified feed" do
-      feed = FactoryGirl.create(:feed)
+    context "success" do
+      it "returns specified feed" do
+        feed = FactoryGirl.create(:feed)
 
-      get feed_path(feed.id, 'json')
+        get feed_path(feed.id, 'json')
 
-      expect(response).to have_http_status(200)
-      expect(json_response)
-        .to eq('feed' => {
-                 'id' => feed.id,
-                 'url' => feed.url,
-                 'title' => feed.title
-               })
+        expect(response).to have_http_status(200)
+        expect(json_response)
+          .to eq('feed' => {
+                   'id' => feed.id,
+                   'url' => feed.url,
+                   'title' => feed.title
+                 })
 
+      end
+    end
+
+    context "failure" do
+      it "returns the correct code" do
+        get feed_path(443242)
+
+        expect(response).to have_http_status(404)
+      end
+
+      it "returns the error message" do
+        get feed_path(443242)
+
+        expect(json_response.fetch('error')).to match(/Couldn't find/)
+      end
     end
   end
 end

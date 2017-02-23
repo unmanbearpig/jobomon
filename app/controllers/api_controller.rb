@@ -8,6 +8,10 @@ class ApiController < ApplicationController
     render_error(400, error)
   end
 
+  rescue_from(ActiveRecord::RecordNotFound) do |error|
+    render_error(404, error)
+  end
+
   private
 
   def render_error(status, error)
