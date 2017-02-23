@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223181907) do
+ActiveRecord::Schema.define(version: 20170223192431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20170223181907) do
     t.datetime "published_at"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "source_id"
+    t.index ["source_id"], name: "index_job_offers_on_source_id", using: :btree
   end
 
   create_table "sources", force: :cascade do |t|
@@ -33,4 +35,5 @@ ActiveRecord::Schema.define(version: 20170223181907) do
     t.index ["url"], name: "index_sources_on_url", unique: true, using: :btree
   end
 
+  add_foreign_key "job_offers", "sources"
 end
