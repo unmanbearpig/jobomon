@@ -8,7 +8,7 @@ class FeedsController < ApplicationController
   end
 
   def create
-    raise NotImplementedError
+    render json: Feed.create!(feed_params)
   end
 
   def delete
@@ -27,5 +27,9 @@ class FeedsController < ApplicationController
 
   def feeds
     @feeds ||= Feed.all
+  end
+
+  def feed_params
+    params.require(:feed).permit(:title, :url)
   end
 end
