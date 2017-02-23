@@ -2,7 +2,7 @@ class FeedsController < ApplicationController
   def index
     respond_to do |format|
       format.json do
-        render json: feeds, each_searializer: serializer
+        render json: feeds
       end
     end
   end
@@ -20,10 +20,6 @@ class FeedsController < ApplicationController
   end
 
   private
-
-  def serializer
-    FeedSerializer
-  end
 
   def feeds
     @feeds ||= Feed.all
