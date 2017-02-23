@@ -1,12 +1,10 @@
-class FeedsController < ApplicationController
+class FeedsController < ApiController
   def index
     render json: feeds
   end
 
   def create
     render json: Feed.create!(feed_params)
-  rescue ActiveModel::UnknownAttributeError, ActiveRecord::RecordInvalid => error
-    render_error(400, error)
   end
 
   def show
@@ -21,10 +19,5 @@ class FeedsController < ApplicationController
 
   def feed_params
     params.require(:feed).permit(:title, :url)
-  end
-
-  def render_error(status, error)
-    render status: status,
-           json: { error: error.message }
   end
 end
