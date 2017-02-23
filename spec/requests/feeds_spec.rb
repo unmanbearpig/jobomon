@@ -27,27 +27,51 @@ RSpec.describe "Feeds", type: :request do
       }
     end
 
-    it "creates a new feed" do
-      expect do
+    context "success" do
+      it "creates a new feed" do
+        expect do
+          post feeds_path, params: { feed: feed_data }
+        end.to change { Feed.count }.from(0).to(1)
+
+        feed = Feed.first
+        expect(feed.title).to eq('hello')
+        expect(feed.url).to eq('https://example.com/test')
+
+      end
+
+      it "returns the created feed" do
         post feeds_path, params: { feed: feed_data }
-      end.to change { Feed.count }.from(0).to(1)
 
-      feed = Feed.first
-      expect(feed.title).to eq('hello')
-      expect(feed.url).to eq('https://example.com/test')
+        expect(response).to have_http_status(200)
+        expect(json_response)
+          .to eq('feed' =>
+                 { 'id' => Feed.first.id,
+                   'title' => 'hello',
+                   'url' => 'https://example.com/test'})
 
+      end
     end
 
-    it "returns the created feed" do
-      post feeds_path, params: { feed: feed_data }
+    context "failure" do
+      def make_bad_request
+        post feeds_path, params: { feed: { hello: 'kitty' } }
+      end
 
-      expect(response).to have_http_status(200)
-      expect(json_response)
-        .to eq('feed' =>
-               { 'id' => Feed.first.id,
-                 'title' => 'hello',
-                 'url' => 'https://example.com/test'})
+      it "doesn't touch the Feed" do
+        expect do
+          make_bad_request
+        end.not_to change { Feed.count }
+      end
 
+      it "returns an error code" do
+        make_bad_request
+        expect(response).to have_http_status(400)
+      end
+
+      it "returns the message in JSON" do
+        make_bad_request
+        expect(json_response.fetch('error')).to match(/Url can't be blank/)
+      end
     end
   end
 
