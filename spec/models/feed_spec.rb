@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Feed, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "validations" do
+    subject { FactoryGirl.build(:feed) }
+
+    it { should validate_presence_of :url }
+    it { should validate_uniqueness_of :url }
+  end
 end
