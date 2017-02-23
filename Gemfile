@@ -58,5 +58,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'react_on_rails', '~> 6'
+gem 'feedjira', '~> 2.1'
 
 gem 'mini_racer', platforms: :ruby
