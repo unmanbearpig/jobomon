@@ -1,11 +1,19 @@
 require 'sources/entry'
+require 'sources/feed'
 require 'feedjira'
 
 module Sources
   class UpworkRSS
     class Parser
-      def self.entries(data)
-        Feedjira::Feed.parse(data).entries.map(&method(:construct_entry))
+      def self.parse_feed(data)
+        construct_feed(Feedjira::Feed.parse(data))
+      end
+
+      def self.construct_feed(fj_feed)
+        Feed.new(
+          url: fj_feed.url,
+          title: fj_feed.title,
+          entries: fj_feed.entries.map(&method(:construct_entry)))
       end
 
       def self.construct_entry(fj_entry)
