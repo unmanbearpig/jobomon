@@ -1,6 +1,6 @@
 class FeedsController < ApiController
   def index
-    render json: feeds
+    render json: Feed.all
   end
 
   def create
@@ -12,10 +12,6 @@ class FeedsController < ApiController
   end
 
   private
-
-  def feeds
-    @feeds ||= Feed.all
-  end
 
   def feed_params
     params.require(:feed).permit(:title, :url)
