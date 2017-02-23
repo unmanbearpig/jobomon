@@ -47,6 +47,8 @@ group :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'spring-commands-rspec'
+  gem 'webmock'
+  gem 'vcr', '~> 3.0'
 end
 
 group :development do
