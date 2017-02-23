@@ -50,20 +50,4 @@ RSpec.describe "Feeds", type: :request do
 
     end
   end
-
-  describe "GET /feeds/:id" do
-    it "returns specified feed" do
-      feed = FactoryGirl.create(:feed)
-
-      get feed_path(feed.id)
-
-      expect(response).to have_http_status(200)
-      expect(json_response)
-        .to eq('feed' =>
-               { 'id' => Feed.first.id,
-                 'title' => 'hello',
-                 'url' => 'https://example.com/test'})
-
-    end
-  end
 end
