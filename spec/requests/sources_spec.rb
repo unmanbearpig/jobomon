@@ -93,17 +93,27 @@ RSpec.describe "Sources", type: :request do
     context "success" do
       it "returns specified source" do
         source = FactoryGirl.create(:source)
+        job_offer = FactoryGirl.create(:job_offer, source: source)
 
         get source_path(source.id, 'json')
 
         expect(response).to have_http_status(200)
-        expect(json_response)
-          .to eq('source' => {
-                   'id' => source.id,
-                   'url' => source.url,
-                   'title' => source.title,
-                   'source_type' => source.source_type.to_s
-                 })
+        expect(json_response.fetch('source'))
+          .to eq(
+                'id' => source.id,
+                'url' => source.url,
+                'title' => source.title,
+                'source_type' => source.source_type.to_s,
+                'job_offers' => [
+                  {
+                    'id' => job_offer.id,
+                    'url' => job_offer.url,
+                    'title' => job_offer.title,
+                    'content' => job_offer.content,
+                    'published_at' => job_offer.published_at.as_json
+                  }
+                ]
+              )
 
       end
     end

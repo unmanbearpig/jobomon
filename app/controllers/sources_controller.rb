@@ -10,7 +10,7 @@ class SourcesController < ApiController
   end
 
   def show
-    render json: Source.find(params.fetch(:id))
+    render json: Source.find(params.fetch(:id)), include_job_offers: true
   end
 
   private
