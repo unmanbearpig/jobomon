@@ -1,51 +1,51 @@
 require 'rails_helper'
 
-RSpec.describe "Feeds", type: :request do
+RSpec.describe "Sources", type: :request do
   def json_response
     JSON.parse(response.body)
   end
 
-  describe "GET /feeds" do
-    it "returns the list of all feeds" do
-      feed = FactoryGirl.create(:feed, title: 'hello', url: 'https://example.com/test')
+  describe "GET /sources" do
+    it "returns the list of all sources" do
+      source = FactoryGirl.create(:source, title: 'hello', url: 'https://example.com/test')
 
-      get feeds_path
+      get sources_path
 
       expect(response).to have_http_status(200)
       expect(json_response)
-        .to eq('feeds' => [{'id' => feed.id,
+        .to eq('sources' => [{'id' => source.id,
                             'title' => 'hello',
                             'url' => 'https://example.com/test'}])
     end
   end
 
-  describe "POST /feeds" do
-    let(:feed_data) do
-      feed_data = {
+  describe "POST /sources" do
+    let(:source_data) do
+      source_data = {
         title: 'hello',
         url: 'https://example.com/test'
       }
     end
 
     context "success" do
-      it "creates a new feed" do
+      it "creates a new source" do
         expect do
-          post feeds_path, params: { feed: feed_data }
-        end.to change { Feed.count }.from(0).to(1)
+          post sources_path, params: { source: source_data }
+        end.to change { Source.count }.from(0).to(1)
 
-        feed = Feed.first
-        expect(feed.title).to eq('hello')
-        expect(feed.url).to eq('https://example.com/test')
+        source = Source.first
+        expect(source.title).to eq('hello')
+        expect(source.url).to eq('https://example.com/test')
 
       end
 
-      it "returns the created feed" do
-        post feeds_path, params: { feed: feed_data }
+      it "returns the created source" do
+        post sources_path, params: { source: source_data }
 
         expect(response).to have_http_status(200)
         expect(json_response)
-          .to eq('feed' =>
-                 { 'id' => Feed.first.id,
+          .to eq('source' =>
+                 { 'id' => Source.first.id,
                    'title' => 'hello',
                    'url' => 'https://example.com/test'})
 
@@ -54,13 +54,13 @@ RSpec.describe "Feeds", type: :request do
 
     context "failure" do
       def make_bad_request
-        post feeds_path, params: { feed: { hello: 'kitty' } }
+        post sources_path, params: { source: { hello: 'kitty' } }
       end
 
-      it "doesn't touch the Feed" do
+      it "doesn't touch the Source" do
         expect do
           make_bad_request
-        end.not_to change { Feed.count }
+        end.not_to change { Source.count }
       end
 
       it "returns an error code" do
@@ -75,19 +75,19 @@ RSpec.describe "Feeds", type: :request do
     end
   end
 
-  describe "GET /feeds/:id" do
+  describe "GET /sources/:id" do
     context "success" do
-      it "returns specified feed" do
-        feed = FactoryGirl.create(:feed)
+      it "returns specified source" do
+        source = FactoryGirl.create(:source)
 
-        get feed_path(feed.id, 'json')
+        get source_path(source.id, 'json')
 
         expect(response).to have_http_status(200)
         expect(json_response)
-          .to eq('feed' => {
-                   'id' => feed.id,
-                   'url' => feed.url,
-                   'title' => feed.title
+          .to eq('source' => {
+                   'id' => source.id,
+                   'url' => source.url,
+                   'title' => source.title
                  })
 
       end
@@ -95,13 +95,13 @@ RSpec.describe "Feeds", type: :request do
 
     context "failure" do
       it "returns the correct code" do
-        get feed_path(443242)
+        get source_path(443242)
 
         expect(response).to have_http_status(404)
       end
 
       it "returns the error message" do
-        get feed_path(443242)
+        get source_path(443242)
 
         expect(json_response.fetch('error')).to match(/Couldn't find/)
       end

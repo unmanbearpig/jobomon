@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :feed do
+  factory :source do
     title { Faker::Company.catch_phrase }
     url { Faker::Internet.url }
   end
