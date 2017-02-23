@@ -1,5 +1,6 @@
 require 'sources/upwork-rss'
 
+# FIXME: bad naming, almost the same as the Source model
 module Sources
   SUPPORTED_SOURCES = {
     upwork: Sources::UpworkRSS
