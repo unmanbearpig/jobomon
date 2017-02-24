@@ -9,6 +9,7 @@ It's an API host (and maybe later RSS provider) in Rails and a client in React+R
 The choice or React+Redux is arbitrary, it would've worked just fine with regular server-side rendering.
 
 # TODO
-- Sanitize feed HTML
+- Add a button to update the feed
+- Add search
 - Add filters to feeds
 - Ability to use feeds as sources for other feeds
