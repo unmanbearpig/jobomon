@@ -8,7 +8,7 @@ RSpec.describe FetchJobOffersWorker do
       entries = [
         Sources::Entry.new(url: 'https://example.com',
                            title: 'test title',
-                           content: 'test content',
+                           raw_content: 'test content',
                            published_at: 1.hour.ago)
       ]
       allow(Sources).to receive(:fetch).with(source)

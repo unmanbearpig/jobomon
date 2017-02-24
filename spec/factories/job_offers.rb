@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :job_offer do
+    source { build(:source) }
     title { Faker::Company.catch_phrase }
     url { Faker::Internet.url }
     content { Faker::Lorem.paragraph }

@@ -1,12 +1,12 @@
 module Sources
   class Entry
-    ATTRIBUTES = [:url, :title, :content, :published_at].freeze
+    ATTRIBUTES = [:url, :title, :raw_content, :published_at].freeze
     attr_reader *ATTRIBUTES
 
-    def initialize(url:, title:, content:, published_at:)
+    def initialize(url:, title:, raw_content:, published_at:)
       @url = url
       @title = title
-      @content = content
+      @raw_content = raw_content
       @published_at = published_at
     end
 

@@ -26,7 +26,7 @@ RSpec.describe JobOffer, type: :model do
       entry = Sources::Entry.new(
         url: 'https://example.com',
         title: 'test title',
-        content: 'test content',
+        raw_content: 'test content',
         published_at: publish_date)
 
       job_offer = JobOffer.from_entry(entry)
@@ -35,6 +35,32 @@ RSpec.describe JobOffer, type: :model do
       expect(job_offer.title).to eq('test title',)
       expect(job_offer.content).to eq('test content',)
       expect(job_offer.published_at).to eq(publish_date)
+    end
+  end
+
+  describe "content" do
+    it "is updated automatically from raw content" do
+      subject = FactoryGirl.build(:job_offer, content: nil, raw_content: 'test')
+      expect(subject.content).to eq('test')
+    end
+
+    it "sanitizes html of raw content" do
+      allow(SanitizeHTML).to receive(:call).and_return('-sanitized-')
+      subject = FactoryGirl.build(:job_offer, content: nil, raw_content: 'test')
+      expect(subject.content).to eq('-sanitized-')
+    end
+
+    it "returns content if avaliable" do
+      subject = FactoryGirl.build(:job_offer, content: 'content', raw_content: 'raw')
+      expect(subject.content).to eq('content')
+    end
+
+    it "automatically saves sanitized content" do
+      subject = FactoryGirl.build(:job_offer, content: nil, raw_content: 'test')
+      subject.content
+      subject.save!
+
+      expect(subject.read_attribute(:content)).to eq('test')
     end
   end
 end

@@ -35,7 +35,7 @@ module Sources
           aggregate_failures do
             expect(entries.first.title)
               .to eq('Data Entry Easy Job!!! - Upwork')
-            expect(entries.first.content)
+            expect(entries.first.raw_content)
               .to start_with('NOTE:: Top performing freelancers will receive more work!!!')
             expect(entries.first.url)
               .to eq('https://www.upwork.com/jobs/Data-Entry-Easy-Job_%7E0177f6b6f281c24a40?source=rss')
