@@ -3,20 +3,26 @@ import { connect } from 'react-redux';
 import { fetchFeeds } from '../actions';
 import FeedListElements from '../components/FeedListElements';
 
-const FeedList = ({ feeds, onClick }) => {
+class FeedList extends React.Component {
+  componentDidMount() {
+    this.props.fetchFeeds();
+  }
+
+  render() {
     return (
-        <div className={'feeds'}>
-            <button onClick={() => onClick() }>ClickMe</button>
+      <div className={'feeds'}>
+            <button onClick={() => this.props.fetchFeeds() }>Refresh</button>
             <ul>
-                { FeedListElements(feeds) }
+                { FeedListElements(this.props.feeds) }
             </ul>
         </div>
     );
-};
+  }
+}
 
 FeedList.propTypes = {
     feeds: PropTypes.array,
-    onClick: PropTypes.func
+    fetchFeeds: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
@@ -27,7 +33,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onClick: () => dispatch(fetchFeeds())
+      fetchFeeds: () => dispatch(fetchFeeds())
     };
 };
 
