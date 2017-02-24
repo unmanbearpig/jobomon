@@ -1,1 +1,4 @@
 export const FILTER = 'FILTER';
+
+export const REQUESTED_FEEDS = 'REQUESTED_FEEDS';
+export const RECEIVED_FEEDS = 'RECEIVED_FEEDS';
