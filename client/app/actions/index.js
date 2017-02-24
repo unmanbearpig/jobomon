@@ -24,10 +24,3 @@ export function fetchFeeds() {
                  );
     };
 }
-
-export function filterTable(filter) {
-    return {
-        type: types.FILTER,
-        filter
-    };
-}

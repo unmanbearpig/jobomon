@@ -17,12 +17,11 @@ const FeedList = ({ feeds, onClick }) => {
 FeedList.propTypes = {
     feeds: PropTypes.array,
     onClick: PropTypes.func
-
 };
 
 const mapStateToProps = (state) => {
     return {
-        feeds: state.feeds
+      feeds: Object.values(state.feeds)
     };
 };
 
