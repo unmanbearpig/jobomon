@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchFeeds } from '../actions';
-import FeedListElements from './FeedListElements';
+import FeedListElements from '../components/FeedListElements';
 
 const FeedList = ({ feeds, onClick }) => {
     return (
