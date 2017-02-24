@@ -24,3 +24,27 @@ export function fetchFeeds() {
                  );
     };
 }
+
+function requestFeed(feedId) {
+  return {
+    feedId: feedId,
+    type: types.REQUESTED_FEEDS
+  };
+}
+
+function receivedFeed(data) {
+  return {
+    type: types.RECEIVED_FEED,
+    feed: data.feed
+  };
+}
+
+export function fetchFeed(feedId) {
+  return(dispatch) => {
+    dispatch(requestFeed(feedId));
+
+    return fetch(`/api/feeds/${feedId}`)
+      .then(response => response.json())
+      .then(json => dispatch(receivedFeed(json)));
+  };
+}
