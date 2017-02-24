@@ -5,7 +5,6 @@ import FeedList from './containers/FeedList';
 
 export default (
 	<Route path="/" component={App}>
-		<IndexRoute component={FilterableTable} />
-    <Route path="/feeds" component={FeedList} />
+		<IndexRoute component={FeedList} />
 	</Route>
 );
