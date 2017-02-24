@@ -1,24 +1,9 @@
-# README
+# Jobomon
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Work In Progress.
 
-Things you may want to cover:
+The idea is to aggregate job offers from multiple sources into a single feed, filter and rank them, maybe send notification emails about certain ones. So far it does none of these things.
 
-* Ruby version
+It's an API host (and maybe later RSS provider) in Rails and a client in React+Redux if I don't abandon it before I finish it.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The choice or React+Redux is arbitrary, it would've worked just fine with regular server-side rendering.
