@@ -14,4 +14,8 @@ class Source < ApplicationRecord
   def source_type
     self[:source_type]&.to_sym
   end
+
+  def to_s
+    "<#{source_type} \"#{title}\" at \"#{url}\">"
+  end
 end

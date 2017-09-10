@@ -12,4 +12,8 @@ class JobOffer < ApplicationRecord
   def content
     self[:content] ||= SanitizeHTML.(raw_content)
   end
+
+  def to_s
+    title
+  end
 end
