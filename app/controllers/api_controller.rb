@@ -4,6 +4,8 @@ class ApiController < ApplicationController
     ActiveRecord::RecordInvalid
   ]
 
+  protect_from_forgery false
+
   rescue_from(*USER_ERRORS) do |error|
     render_error(400, error)
   end
