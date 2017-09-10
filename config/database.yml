@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: jobomon_production
-  username: jobomon
-  password: <%= ENV['JOBOMON_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL']%>
