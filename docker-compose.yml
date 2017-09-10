@@ -1,0 +1,22 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+
+  redis:
+    image: redis
+
+  web:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/myapp
+    ports:
+      - "3010:3000"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      DATABASE_URL: 'postgres://postgres:mysecretpassword@postgres/postgres'
