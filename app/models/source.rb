@@ -16,6 +16,6 @@ class Source < ApplicationRecord
   end
 
   def to_s
-    "<#{source_type} \"#{title}\" at \"#{url}\">"
+    "<#{source_type} \"#{title}\" (#{fetched_at}) at \"#{url}\">"
   end
 end
