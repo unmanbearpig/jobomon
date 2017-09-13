@@ -12,4 +12,4 @@ WORKDIR $APP_HOME
 ADD Gemfile* $APP_HOME/
 RUN bundle install
 
-ADD . $APP_HOME
+COPY . $APP_HOME
