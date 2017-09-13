@@ -1,9 +1,11 @@
-REDIS_URL = 'redis://redis:6379/12'
+require 'sidekiq'
+require 'sidekiq/scheduler'
+
 
 Sidekiq.configure_server do |config|
-  config.redis = { url: REDIS_URL }
-end
-
-Sidekiq.configure_client do |config|
-  config.redis = { url: REDIS_URL }
+  config.redis = { url: ENV['REDIS_URL'] }
+  config.on(:startup) do
+    Sidekiq.schedule = YAML.load_file(File.expand_path('../../sidekiq_scheduler.yml', __FILE__))
+    Sidekiq::Scheduler.reload_schedule!
+  end
 end

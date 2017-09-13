@@ -68,5 +68,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'feedjira', '~> 2.1'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'sidekiq', '~> 4.2'
+gem 'sidekiq-scheduler', '~> 2.1'
 gem 'faraday_adapter_socks'
 gem 'dotenv-rails', group: [:development, :text]

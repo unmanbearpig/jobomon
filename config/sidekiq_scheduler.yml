@@ -1,0 +1,4 @@
+fetch_sources:
+  every: '45m'
+  class: FetchSourcesWorker
+  description: 'Update all sources'
