@@ -4,7 +4,7 @@ class ApiController < ApplicationController
     ActiveRecord::RecordInvalid
   ]
 
-  protect_from_forgery false
+  protect_from_forgery with: :exception, unless: -> { request.format.json? }
 
   rescue_from(*USER_ERRORS) do |error|
     render_error(400, error)
