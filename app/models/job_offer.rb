@@ -14,6 +14,10 @@ class JobOffer < ApplicationRecord
   end
 
   def to_s
-    title
+    "(#{updated_at}) #{title}"
+  end
+
+  def duplicate?
+    source.job_offers.where(url: url).any?
   end
 end
