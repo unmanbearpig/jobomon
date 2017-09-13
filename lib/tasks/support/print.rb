@@ -6,7 +6,7 @@ class Print
       elsif object_or_objects.kind_of?(Array) || object_or_objects.kind_of?(Enumerable)
         print_enumerable(object_or_objects)
       else
-        puts object_or_objects
+        print_single(object_or_objects)
       end
     end
 
@@ -18,11 +18,19 @@ class Print
     end
 
     def print_enumerable(enum)
-      enum.each
+      if enum.any?
+        enum.each(&method(:print_single))
+      else
+        print_nothing
+      end
     end
 
     def single_obj_str(obj)
-      "#{obj.class} #{obj.id}: #{obj}"
+      if obj.kind_of?(String)
+        obj
+      else
+        "#{obj.class} #{obj.id}: #{obj}"
+      end
     end
 
     def print_single(obj)
@@ -30,9 +38,17 @@ class Print
     end
 
     def print_relation(relation)
-      relation.find_each do |obj|
-        print_single(obj)
+      if relation.any?
+        relation.find_each do |obj|
+          print_single(obj)
+        end
+      else
+        print_nothing
       end
+    end
+
+    def print_nothing
+      puts '- nothing -'
     end
   end
 end
