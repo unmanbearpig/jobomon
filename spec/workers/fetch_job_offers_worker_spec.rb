@@ -15,7 +15,7 @@ RSpec.describe FetchJobOffersWorker do
                           .and_return(double(Sources::Feed, entries: entries))
 
 
-      FetchJobOffersWorker.fetch_source_id(source.id)
+      FetchJobOffersWorker.new.fetch_source_id(source.id)
     end
   end
 end
