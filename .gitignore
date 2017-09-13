@@ -5,14 +5,14 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-/.bundle
+/rails_app/.bundle
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
+/rails_app/log/*
+/rails_app/tmp/*
+!/rails_app/log/.keep
+!/rails_app/tmp/.keep
 
 # Ignore Byebug command history file.
-.byebug_history
-/docker-compose.dev.yml
+/rails_app/.byebug_history
+/rails_app/docker-compose.dev.yml
