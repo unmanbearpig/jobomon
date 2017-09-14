@@ -16,3 +16,6 @@
 # Ignore Byebug command history file.
 /rails_app/.byebug_history
 /rails_app/docker-compose.dev.yml
+
+elm-app/node_modules
+elm-app/elm-stuff
