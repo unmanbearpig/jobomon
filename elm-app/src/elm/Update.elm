@@ -4,7 +4,7 @@ import Http
 import Json.Decode as Decode
 import Msgs exposing (..)
 import Models exposing (..)
-import ApiRoutes exposing (apiPath)
+import ApiRoutes
 
 
 log : Model -> String -> Model
@@ -16,7 +16,7 @@ getJobOffers : Cmd Msg
 getJobOffers =
     let
         url =
-            apiPath "job_offers"
+            ApiRoutes.jobOffers
     in
         Http.send ReceiveJobOffers (Http.get url decodeJobOffers)
 
