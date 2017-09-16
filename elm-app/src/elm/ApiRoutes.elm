@@ -1,4 +1,4 @@
-module Config exposing (apiPath)
+module ApiRoutes exposing (apiPath)
 
 
 apiRoot : String

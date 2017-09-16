@@ -4,7 +4,7 @@ import Http
 import Json.Decode as Decode
 import Msgs exposing (..)
 import Models exposing (..)
-import Config exposing (apiPath)
+import ApiRoutes exposing (apiPath)
 
 
 log : Model -> String -> Model
