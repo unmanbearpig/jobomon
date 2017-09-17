@@ -10,46 +10,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170224133754) do
+ActiveRecord::Schema.define(version: 20170917171215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "feed_sources", force: :cascade do |t|
-    t.integer  "feed_id",    null: false
-    t.integer  "source_id",  null: false
+  create_table "feed_sources", id: :serial, force: :cascade do |t|
+    t.integer "feed_id", null: false
+    t.integer "source_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["feed_id"], name: "index_feed_sources_on_feed_id", using: :btree
-    t.index ["source_id"], name: "index_feed_sources_on_source_id", using: :btree
+    t.index ["feed_id"], name: "index_feed_sources_on_feed_id"
+    t.index ["source_id"], name: "index_feed_sources_on_source_id"
   end
 
-  create_table "feeds", force: :cascade do |t|
+  create_table "feeds", id: :serial, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "title",      null: false
+    t.string "title", null: false
   end
 
-  create_table "job_offers", force: :cascade do |t|
-    t.string   "url",          null: false
-    t.string   "title"
-    t.text     "raw_content"
+  create_table "job_offers", id: :serial, force: :cascade do |t|
+    t.string "url", null: false
+    t.string "title"
+    t.text "raw_content"
     t.datetime "published_at"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "source_id"
-    t.text     "content"
-    t.index ["source_id"], name: "index_job_offers_on_source_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "source_id"
+    t.text "content"
+    t.index ["source_id"], name: "index_job_offers_on_source_id"
   end
 
-  create_table "sources", force: :cascade do |t|
-    t.string   "title"
-    t.string   "url",         null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "source_type", null: false
+  create_table "sources", id: :serial, force: :cascade do |t|
+    t.string "title"
+    t.string "url", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "source_type", null: false
     t.datetime "fetched_at"
-    t.index ["url"], name: "index_sources_on_url", unique: true, using: :btree
+    t.index ["url"], name: "index_sources_on_url", unique: true
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "job_offers", "sources"
