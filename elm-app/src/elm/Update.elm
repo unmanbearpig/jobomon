@@ -5,6 +5,7 @@ import Json.Decode as Decode
 import Msgs exposing (..)
 import Models exposing (..)
 import ApiRoutes
+import Routing exposing (parseLocation)
 
 
 log : Model -> String -> Model
@@ -40,6 +41,9 @@ update msg model =
     case msg of
         NoOp ->
             ( model, Cmd.none )
+
+        UrlChange location ->
+            ( { model | route = parseLocation location }, Cmd.none )
 
         FetchJobOffers ->
             ( (log model "Fetching job offers..."), getJobOffers )

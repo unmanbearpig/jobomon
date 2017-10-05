@@ -1,17 +1,20 @@
 module Main exposing (..)
 
-import Html exposing (program)
+-- import Html exposing (program)
+
 import Models exposing (Model, model)
-import Msgs exposing (Msg)
+import Msgs exposing (Msg(..))
 import Update exposing (update, getJobOffers)
 import View exposing (view)
+import Navigation
+import Routing
 
 
 -- APP
 
 
 main =
-    Html.program
+    Navigation.program UrlChange
         { init = init
         , view = view
         , update = update
@@ -19,9 +22,9 @@ main =
         }
 
 
-init : ( Model, Cmd Msg )
-init =
-    ( model, getJobOffers )
+init : Navigation.Location -> ( Model, Cmd Msg )
+init location =
+    ( (model (Routing.parseLocation location)), getJobOffers )
 
 
 
