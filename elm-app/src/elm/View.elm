@@ -14,6 +14,8 @@ import Html.Attributes as Attr
 import Bootstrap.Form as Form
 import Bootstrap.Form.Input as Input
 import Routing exposing (signUpPath)
+import Views.Login as Login
+
 
 renderJobOffer : JobOffer -> Html Msg
 renderJobOffer offer =
@@ -58,11 +60,6 @@ mainContent model =
     ]
 
 
-layout : List (Html Msg) -> Html Msg
-layout content =
-    Grid.container [] (CDN.stylesheet :: content)
-
-
 jobsPage : Model -> Html Msg
 jobsPage model =
     Grid.container []
@@ -83,39 +80,11 @@ pageNotFound route =
     div [] [ text "page not found" ]
 
 
-renderUser : Maybe User -> Html Msg
-renderUser maybeUser =
-    let
-        userHtml =
-            case maybeUser of
-                Just user ->
-                    div [] [ text ("Logged in as " ++ user.email) ]
-
-                Nothing ->
-                    div [] [ text "Not logged in" ]
-    in
-        div [] [ userHtml ]
-
-
-loginPage : Maybe User -> Html Msg
-loginPage maybeUser =
-    layout
-        [ h1 [ Attr.class "page-header" ] [ text "Log in" ]
-        , a [ Attr.href signUpPath ] [ text "Sign up" ]
-        , div [] [ renderUser maybeUser ]
-        , Form.form [] [ Form.group []
-                             [ Form.label [ Attr.for "email" ] [ text "Email" ]
-                             , Input.email [ Input.id "email" ]
-                             ]
-                       ]
-        ]
-
-
 view : Model -> Html Msg
 view model =
     case model.route of
         LoginRoute ->
-            loginPage model.user
+            Login.loginPage model.user
 
         SignUpRoute ->
             notImplemented
