@@ -12,7 +12,7 @@ import Routing
 
 -- APP
 
-
+main : Program Never Model Msg
 main =
     Navigation.program UrlChange
         { init = init
