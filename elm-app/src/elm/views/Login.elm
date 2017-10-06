@@ -6,7 +6,7 @@ import Html.Events exposing (onSubmit, onInput)
 import Bootstrap.Button as Button
 import Bootstrap.Form as Form
 import Bootstrap.Form.Input as Input
-import Routing exposing (signUpPath)
+import Routing exposing (signUpPath, jobsPath)
 import Views.Layout exposing (layout)
 import Msgs exposing (Msg(..))
 import Models exposing (User, LoginStatus(..), LoginForm)
@@ -47,11 +47,29 @@ renderLoginForm loginForm =
         ]
 
 
+notLoggedInPage : LoginForm -> LoginStatus -> List (Html Msg)
+notLoggedInPage loginForm status =
+    [ a [ Attr.href signUpPath ] [ text "Sign up" ]
+    , div [] [ renderStatus status ]
+    , renderLoginForm loginForm
+    ]
+
+
+loggedInPage : User -> List (Html Msg)
+loggedInPage user =
+    [ div [ ] [ text ("Logged in as " ++ user.email) ]
+    , a [ Attr.href jobsPath ] [ text "Go to jobs" ] ]
+
+
 loginPage : LoginForm -> LoginStatus -> Html Msg
 loginPage loginForm status =
-    layout
-        [ h1 [ Attr.class "page-header" ] [ text "Log in" ]
-        , a [ Attr.href signUpPath ] [ text "Sign up" ]
-        , div [] [ renderStatus status ]
-        , renderLoginForm loginForm
-        ]
+    let
+        html =
+            case status of
+                LoggedIn user ->
+                    loggedInPage user
+
+                _ ->
+                    notLoggedInPage loginForm status
+    in
+        layout ([ h1 [ Attr.class "page-header" ] [ text "Log in" ] ] ++ html)
