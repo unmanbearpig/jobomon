@@ -11,9 +11,6 @@ import Bootstrap.Grid.Col as Col
 import Bootstrap.Grid.Row as Row
 import Bootstrap.Button as Button
 import Html.Attributes as Attr
-import Bootstrap.Form as Form
-import Bootstrap.Form.Input as Input
-import Routing exposing (signUpPath)
 import Views.Login as Login
 
 
@@ -84,7 +81,7 @@ view : Model -> Html Msg
 view model =
     case model.route of
         LoginRoute ->
-            Login.loginPage model.user
+            Login.loginPage model.loginForm model.loginStatus
 
         SignUpRoute ->
             notImplemented

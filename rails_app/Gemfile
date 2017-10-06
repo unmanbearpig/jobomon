@@ -54,3 +54,4 @@ gem 'sidekiq', '~> 4.2'
 gem 'sidekiq-scheduler', '~> 2.1'
 gem 'faraday_adapter_socks'
 gem 'dotenv-rails', group: [:development, :text]
+gem 'knock'

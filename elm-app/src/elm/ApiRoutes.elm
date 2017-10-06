@@ -1,4 +1,4 @@
-module ApiRoutes exposing (jobOffers)
+module ApiRoutes exposing (jobOffers, login)
 
 
 apiRoot : String
@@ -14,3 +14,7 @@ apiPath path =
 jobOffers : String
 jobOffers =
     apiPath "job_offers"
+
+login : String
+login =
+    apiPath "user_token"

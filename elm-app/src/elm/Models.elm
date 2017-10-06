@@ -1,10 +1,12 @@
 module Models exposing (..)
 
+
 type Route
     = LoginRoute
     | SignUpRoute
     | JobsRoute
     | NotFoundRoute
+
 
 type alias JobOffer =
     { title : String
@@ -13,16 +15,41 @@ type alias JobOffer =
     , content : String
     }
 
+
 type alias User =
-    { email : String }
+    { email : String
+    , authToken : AuthToken
+    }
+
+type alias AuthToken =
+    String
 
 
 type alias Model =
     { jobOffers : List JobOffer
     , log : List String
     , route : Route
-    , user : Maybe User
+    , loginStatus : LoginStatus
+    , loginForm : LoginForm
     }
+
+
+type alias LoginForm =
+    { email : String
+    , password : String
+    }
+
+
+type LoginStatus
+    = LoginNotRequested
+    | LoginRequested LoginForm
+    | LoginFailed String
+    | LoggedIn User
+
+
+loginForm : LoginForm
+loginForm =
+    { email = "", password = "" }
 
 
 model : Route -> Model
@@ -30,5 +57,6 @@ model route =
     { jobOffers = []
     , log = []
     , route = route
-    , user = Nothing
+    , loginStatus = LoginNotRequested
+    , loginForm = loginForm
     }

@@ -1,4 +1,7 @@
 class ApiController < ApplicationController
+  include Knock::Authenticable
+  # before_action :authenticate_user
+
   USER_ERRORS = [
     ActiveModel::UnknownAttributeError,
     ActiveRecord::RecordInvalid
