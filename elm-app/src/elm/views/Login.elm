@@ -7,7 +7,7 @@ import Bootstrap.Button as Button
 import Bootstrap.Form as Form
 import Bootstrap.Form.Input as Input
 import Routing exposing (signUpPath, jobsPath)
-import Views.Layout exposing (layout)
+import Views.Layout exposing (bsLayout)
 import Msgs exposing (Msg(..))
 import Models exposing (User, LoginStatus(..), LoginForm)
 
@@ -72,4 +72,4 @@ loginPage loginForm status =
                 _ ->
                     notLoggedInPage loginForm status
     in
-        layout ([ h1 [ Attr.class "page-header" ] [ text "Log in" ] ] ++ html)
+        bsLayout ([ h1 [ Attr.class "page-header" ] [ text "Log in" ] ] ++ html)
